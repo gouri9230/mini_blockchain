@@ -2,7 +2,7 @@ from blockchain import Blockchain
 
 blockchain = Blockchain()
 timestamps = []
-print("enter")
+
 # to avoid getting genesis block
 blockchain.add_block("testing block")
 for i in range(1000):

@@ -3,6 +3,9 @@ from hash_generator import hash_function
 
 class Blockchain:
     def __init__(self):
+        """
+        initialize the blockchain with genesis block
+        """
         self.chain = [Block.genesis_block()]
 
     def __str__(self):
@@ -14,6 +17,8 @@ class Blockchain:
         self.chain.append(new_block)
 
     def replace_chain(self, chain):
+        # convert the blocks in the chain which are of type dictionary into Block type
+        # (**block_dict) --> destructures the dictionary into key-value pairs
         new_chain = [Block(**block_dict) for block_dict in chain]
         if len(new_chain)<= len(self.chain):
             print("The incoming chain is not longer than the existing chain")
@@ -27,12 +32,15 @@ class Blockchain:
             
     @staticmethod
     def is_valid_chain(chain):
+        # convert the blockchain blocks into dictionaries 
         chain_dicts = [block.__dict__ for block in chain]
 
+        # 1st block in the chain should be genesis block
         if chain_dicts[0] != Block.genesis_block().__dict__:
             print("Chain is invalid") 
             return False
         
+        # check whether each block's previous hash matches with its current hash
         for i in range(1,len(chain)):
             if chain_dicts[i-1]["hash"] != chain_dicts[i]["prev_hash"]:
                 print("your chain is broken") 
@@ -40,6 +48,7 @@ class Blockchain:
             
             prev_difficulty = chain_dicts[i-1]["difficulty"]
             current_difficulty = chain_dicts[i]["difficulty"]
+            # current hash should be equal to the hash of its contents
             current_block_hash = hash_function([chain_dicts[i]["block_no"], 
                                                 chain_dicts[i]["timestamp"], 
                                                 chain_dicts[i]["data"], 
@@ -50,6 +59,7 @@ class Blockchain:
             if current_block_hash != chain_dicts[i]["hash"]:
                 print("current block is invalid") 
                 return False
+            
             if abs(current_difficulty - prev_difficulty) > 1:
                 print("Difficulty level has been compromised")
                 return False

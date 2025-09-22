@@ -27,34 +27,39 @@ A simple blockchain implementation in Python using FastAPI for the API and Redis
 ## Installation
 
 1. Clone the Repository
-   https://github.com/gouri9230/mini_blockchain.git
-   cd mini_blockchain
+   - https://github.com/gouri9230/mini_blockchain.git
+   - cd mini_blockchain
 
 2. Set Up a Virtual Environment
-   python -m venv venv
-   source venv/bin/activate (Linux/Mac)
-   venv\Scripts\activate (Windows)
+   - python -m venv venv
+   - source venv/bin/activate (Linux/Mac)
+   - venv\Scripts\activate (Windows)
 
 3. Install Dependencies
-   pip install -r requirements.txt
+   - pip install -r requirements.txt
 
 4. Start Redis Server
-   redis-server
+   - redis-server
 
 ## Usage
 
 1. Run the FastAPI server
-   uvicorn main:app (runs in port 8000 by default) - at this point you can use GET API on : http://127.0.0.1:8000/api/blocks - mine a block using: POST http://127.0.0.1:8000/api/mineblock
-   after mining some blocks, run another server: uvicorn main:app --port 8001 - you should see the synchronized blockchain with your added blocks on GET API on : http://127.0.0.1:8001/api/blocks - mine a block using: POST http://127.0.0.1:8001/api/mineblock and see if it is reflected in the 8000 port server.
+   uvicorn main:app (runs in port 8000 by default)
+     - at this point you can use GET API on : http://127.0.0.1:8000/api/blocks
+     - mine a block using: POST http://127.0.0.1:8000/api/mineblock
+     - after mining some blocks, run another server: uvicorn main:app --port 8001
+     - you should see the synchronized blockchain with your added blocks on GET API on : http://127.0.0.1:8001/api/blocks
+     - mine a block using: POST http://127.0.0.1:8001/api/mineblock and see if it is reflected in the 8000 port server.
 
 ## Project Structure
-
+```
 ├── main.py # FastAPI server and endpoints
 ├── blockchain.py # Blockchain class managing the chain
 ├── block.py # Block class and mining logic
 ├── publishersubscriber.py# Redis Pub/Sub implementation
 ├── hash_generator.py # Hash function utility
 └── README.md # Project documentation
+```
 
 ## How it works
 

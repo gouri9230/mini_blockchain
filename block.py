@@ -3,7 +3,7 @@ from datetime import datetime
 
 DIFFICULTY = 4
 NONCE = 0
-MINING_RATE = 2000 # 1 sec
+MINING_RATE = 2000 # 2 sec
 
 class Block:
     def __init__(self, block_no, timestamp, data, prev_hash, hash, nonce, difficulty):
@@ -16,7 +16,7 @@ class Block:
         self.difficulty = difficulty
     
     def __str__(self):
-        return str({"block_no": self.block_no, "timestamp": self.timestamp, "data": self.data, "prev_hash": self.prev_hash, "block_hash": self.hash})
+        return str({"block_no": self.block_no, "timestamp": self.timestamp, "data": self.data, "prev_hash": self.prev_hash, "hash": self.hash, "nonce": self.nonce, "difficulty": self.difficulty})
     
     @staticmethod
     def genesis_block():

@@ -14,13 +14,16 @@ class Blockchain:
         self.chain.append(new_block)
 
     def replace_chain(self, chain):
-        if len(chain)<= len(self.chain):
-            return "The incoming chain is not longer than the existing chain"
+        new_chain = [Block(**block_dict) for block_dict in chain]
+        if len(new_chain)<= len(self.chain):
+            print("The incoming chain is not longer than the existing chain")
+            return False 
         
-        if Blockchain.is_valid_chain() != True:
-            return "The incoming chain is not valid"
+        if not self.is_valid_chain(new_chain):
+            print("The incoming chain is not valid")
+            return False 
         
-        self.chain = chain
+        self.chain = new_chain
             
     @staticmethod
     def is_valid_chain(chain):
@@ -55,8 +58,8 @@ class Blockchain:
         return True
 
 bc = Blockchain()
-bc.add_block("this is block added after blockchain class")
-bc.add_block("mining another block")
+#bc.add_block("this is block added after blockchain class")
+#bc.add_block("mining another block")
 result = Blockchain.is_valid_chain(bc.chain)
 #print(result)
 #print([block.__dict__ for block in bc.chain])
